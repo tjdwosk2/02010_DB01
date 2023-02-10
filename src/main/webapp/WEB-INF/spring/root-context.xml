@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	    <!-- 순서가 틀리면 안된다. -->
+    <!-- 오라클 연결 -->
+    <!-- Drive Manager Data Source -->
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />
+        <property name="url" value="jdbc:oracle:thin:@192.168.0.11:1521:xe" />
+        <property name="username" value="c##ictedu" />
+        <property name="password" value="1111" />
+    </bean>
+    <!-- JdbcTemplate : spring에서 지원하는 jdbc  가져와야하다보니 이름이 같았다 dataSource 그래서 autowire byName 가져왔다-->
+    <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate" autowire="byName" />
+        <!-- <property name="dataSource" ref="dataSource" /> --><!-- 위의 id가 dataSource인걸 참조한다. -->
+
+    <!-- </bean> -->
+
+    <!-- DAO  jdbcTemplate 를 가져오려고하다보니 이름이 같았다 그래서 byName 써줬다 -->
+    <bean id="dao" class="com.ict.edu.DAO" autowire="byName" />
+        <!-- <property name="jdbcTemplate" ref="jdbcTemplate" />
+    </bean> -->
+</beans>
+
+
